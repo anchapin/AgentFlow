@@ -1,0 +1,60 @@
+const sqlite3 = require('sqlite3').verbose();
+
+const DB_PATH = './.swarm/memory.db';
+
+class Memory {
+  constructor() {
+    this.db = new sqlite3.Database(DB_PATH, (err) => {
+      if (err) {
+        console.error("Error opening database", err.message);
+      } else {
+        console.log("Connected to the SQLite database.");
+        this.db.run(`CREATE TABLE IF NOT EXISTS messages (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          agent TEXT NOT NULL,
+          content TEXT NOT NULL,
+          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )`);
+      }
+    });
+  }
+
+  async saveMessage(agent, content) {
+    return new Promise((resolve, reject) => {
+      this.db.run('INSERT INTO messages (agent, content) VALUES (?, ?)', [agent, content], function(err) {
+        if (err) {
+          console.error("Error saving message", err.message);
+          reject(err);
+        } else {
+          console.log(`A row has been inserted with rowid ${this.lastID}`);
+          resolve(this.lastID);
+        }
+      });
+    });
+  }
+
+  async getMessages() {
+    return new Promise((resolve, reject) => {
+      this.db.all('SELECT agent, content FROM messages ORDER BY timestamp ASC', [], (err, rows) => {
+        if (err) {
+          console.error("Error retrieving messages", err.message);
+          reject(err);
+        } else {
+          resolve(rows.map(row => `${row.agent}: ${row.content}`));
+        }
+      });
+    });
+  }
+
+  close() {
+    this.db.close((err) => {
+      if (err) {
+        console.error("Error closing database", err.message);
+      } else {
+        console.log("Closed the SQLite database connection.");
+      }
+    });
+  }
+}
+
+module.exports = { Memory };
