@@ -1,14 +1,1 @@
-const { exec } = require('child_process');
-
-const prompt = '"Hello, world!"';
-
-exec(`gemini -p ${prompt}`, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  if (stderr) {
-    console.error(`stderr: ${stderr}`);
-  }
-});
+const { app } = require("./multiAgentScenario");async function runMultiAgentScenario() {  const initialQuestion = "Explain the concept of recursion in programming.";  const inputs = { messages: [initialQuestion], question: initialQuestion };  console.log("Initial Question:", initialQuestion);  let allMessages = [initialQuestion];  for await (const output of await app.stream(inputs)) {    if (output.agent_one) {      const newMessage = output.agent_one.messages[output.agent_one.messages.length - 1];      console.log("Agent One's response:", newMessage);      allMessages.push(newMessage);    } else if (output.agent_two) {      const newMessage = output.agent_two.messages[output.agent_two.messages.length - 1];      console.log("Agent Two's response:", newMessage);      allMessages.push(newMessage);    }    console.log("\n---\n");  }  console.log("Final conversation history:", allMessages);}runMultiAgentScenario();
