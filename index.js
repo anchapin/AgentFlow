@@ -24,6 +24,10 @@ async function runMultiAgentScenario() {
       console.log("\n---\n");
     }
     console.log("Final conversation history:", allMessages);
+  console.log("\n--- Performance Metrics ---");
+  console.log("Total Gemini Calls:", finalState.totalGeminiCalls);
+  console.log("Total Input Characters:", finalState.totalInputCharacters);
+  console.log("Total Output Characters:", finalState.totalOutputCharacters);
   } finally {
     memory.close(); // Ensure the database connection is closed
   }
