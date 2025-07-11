@@ -5,6 +5,7 @@ const { Memory } = require('../memory');
 
 async function testMemory() {
   const memory = new Memory();
+  await memory.init();
   await memory.saveMessage('user', 'Hello');
   await memory.saveMessage('assistant', 'Hi there!');
   const messages = await memory.getMessages();
