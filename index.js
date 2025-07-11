@@ -29,4 +29,38 @@ async function runMultiAgentScenario() {
   }
 }
 
-runMultiAgentScenario();
+async function main() {
+  const args = process.argv.slice(2);
+
+  if (args[0] === '--clear-memory') {
+    const memory = new Memory();
+    try {
+      await memory.clearMessages();
+      console.log("Memory cleared successfully.");
+    } catch (error) {
+      console.error("Failed to clear memory:", error);
+    } finally {
+      memory.close();
+    }
+  } else if (args[0] === '--view-memory') {
+    const memory = new Memory();
+    try {
+      const messages = await memory.getMessages();
+      if (messages.length > 0) {
+        console.log("\n--- Conversation History ---");
+        messages.forEach(msg => console.log(msg));
+        console.log("----------------------------");
+      } else {
+        console.log("No conversation history found.");
+      }
+    } catch (error) {
+      console.error("Failed to retrieve memory:", error);
+    } finally {
+      memory.close();
+    }
+  } else {
+    runMultiAgentScenario();
+  }
+}
+
+main();
