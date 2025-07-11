@@ -1,4 +1,4 @@
-const { app } = require("./multiAgentScenario");
+const { startInteractiveCli } = require("./ui/cli");
 const { Memory } = require("./memory");
 
 async function runMultiAgentScenario() {
@@ -9,7 +9,12 @@ async function runMultiAgentScenario() {
   let allMessages = []; // Messages will be accumulated from the stream
 
   const memory = new Memory(); // Create a new Memory instance
-  await memory.init();
+  try {
+    await memory.init();
+  } catch (error) {
+    console.error("Failed to initialize memory:", error);
+    return; // Prevent further execution if initialization fails
+  }
 
   try {
     for await (const output of await app.stream(inputs)) {
@@ -35,8 +40,8 @@ async function main() {
 
   if (args[0] === '--clear-memory') {
     const memory = new Memory();
-    await memory.init();
     try {
+      await memory.init();
       await memory.clearMessages();
       console.log("Memory cleared successfully.");
     } catch (error) {
@@ -46,8 +51,8 @@ async function main() {
     }
   } else if (args[0] === '--view-memory') {
     const memory = new Memory();
-    await memory.init();
     try {
+      await memory.init();
       const messages = await memory.getMessages();
       if (messages.length > 0) {
         console.log("\n--- Conversation History ---");
@@ -62,7 +67,7 @@ async function main() {
       memory.close();
     }
   } else {
-    runMultiAgentScenario();
+    startInteractiveCli();
   }
 }
 
