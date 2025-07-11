@@ -2,7 +2,7 @@
 
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
-const { runMultiAgentScenario } = require('../index.js');
+const { runMultiAgentScenario } = require('../src/app.js');
 
 yargs(hideBin(process.argv))
   .command('$0 [prompt]', 'Run the AgentFlow multi-agent scenario', (yargs) => {
