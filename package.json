@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "agentflow": "./bin/agentflow.js"
+  },
   "scripts": {
     "test": "node test/basic.test.js"
   },
