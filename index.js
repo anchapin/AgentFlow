@@ -1,8 +1,8 @@
 const { app } = require("./multiAgentScenario");
 const { Memory } = require("./memory");
 
-async function runMultiAgentScenario() {
-  const initialQuestion = "Explain the concept of recursion in programming.";
+async function runMultiAgentScenario(question) {
+  const initialQuestion = question || "Explain the concept of recursion in programming.";
   const inputs = { question: initialQuestion }; // Messages will be loaded from DB
   console.log("Initial Question:", initialQuestion);
 
@@ -30,40 +30,4 @@ async function runMultiAgentScenario() {
   }
 }
 
-async function main() {
-  const args = process.argv.slice(2);
-
-  if (args[0] === '--clear-memory') {
-    const memory = new Memory();
-    await memory.init();
-    try {
-      await memory.clearMessages();
-      console.log("Memory cleared successfully.");
-    } catch (error) {
-      console.error("Failed to clear memory:", error);
-    } finally {
-      memory.close();
-    }
-  } else if (args[0] === '--view-memory') {
-    const memory = new Memory();
-    await memory.init();
-    try {
-      const messages = await memory.getMessages();
-      if (messages.length > 0) {
-        console.log("\n--- Conversation History ---");
-        messages.forEach(msg => console.log(msg));
-        console.log("----------------------------");
-      } else {
-        console.log("No conversation history found.");
-      }
-    } catch (error) {
-      console.error("Failed to retrieve memory:", error);
-    } finally {
-      memory.close();
-    }
-  } else {
-    runMultiAgentScenario();
-  }
-}
-
-main();
+module.exports = { runMultiAgentScenario };
