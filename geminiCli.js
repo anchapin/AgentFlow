@@ -1,13 +1,14 @@
 const { exec } = require('child_process');
 const { getEncoding } = require('tiktoken');
+const config = require('./config');
 
 const encoding = getEncoding('cl100k_base');
 let proQuotaExceeded = false;
 
 async function callGeminiCli(prompt) {
   const escapedPrompt = JSON.stringify(prompt);
-  const proCommand = `gemini -m gemini-1.5-pro -p ${escapedPrompt}`;
-  const flashCommand = `gemini -m gemini-1.5-flash -p ${escapedPrompt}`;
+  const proCommand = `gemini -m ${config.gemini.proModel} -p ${escapedPrompt}`;
+  const flashCommand = `gemini -m ${config.gemini.flashModel} -p ${escapedPrompt}`;
 
   const executeCommand = (command, model) => {
     return new Promise((res, rej) => {
@@ -24,7 +25,7 @@ async function callGeminiCli(prompt) {
     });
   };
 
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, config.gemini.rateLimitDelay));
 
   if (!proQuotaExceeded) {
     try {

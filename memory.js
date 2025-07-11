@@ -1,9 +1,10 @@
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 const path = require('path');
+const config = require('./config');
 
-const DB_DIR = './.swarm';
-const DB_PATH = path.join(DB_DIR, 'memory.db');
+const DB_DIR = config.memory.dbDir;
+const DB_PATH = path.join(DB_DIR, config.memory.dbName);
 
 class Memory {
   constructor() {
