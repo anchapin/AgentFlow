@@ -30,13 +30,36 @@ npm test
 ```
 
 ### Start the Application
-Based on the file structure, the main entry point is likely `index.js` or `geminiCli.js`. You might start the application using `node index.js` or by running a script defined in `package.json`.
+
+To run the multi-agent conversation scenario:
 
 ```bash
-node index.js
-# or
-node geminiCli.js
+agentflow [prompt]
 ```
+
+### Command-Line Arguments
+
+`agentflow` supports the following arguments:
+
+*   `[prompt]`: An optional initial prompt for the multi-agent scenario. If not provided, a default question will be used.
+    ```bash
+    agentflow "Explain quantum entanglement."
+    ```
+
+*   `--help` or `-h`: Display usage information and available commands.
+    ```bash
+    agentflow --help
+    ```
+
+*   `--view-memory` or `-v`: View the stored conversation history.
+    ```bash
+    agentflow --view-memory
+    ```
+
+*   `--clear-memory` or `-c`: Clear the entire conversation history.
+    ```bash
+    agentflow --clear-memory
+    ```
 
 ## Conventions
 
