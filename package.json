@@ -2,7 +2,7 @@
   "name": "agentflow",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "bin": {
     "agentflow": "./bin/agentflow.js"
   },
