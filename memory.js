@@ -57,6 +57,20 @@ class Memory {
     });
   }
 
+  async clearMessages() {
+    return new Promise((resolve, reject) => {
+      this.db.run('DELETE FROM messages', [], function(err) {
+        if (err) {
+          console.error("Error clearing messages", err.message);
+          reject(err);
+        } else {
+          console.log(`Cleared ${this.changes} messages.`);
+          resolve();
+        }
+      });
+    });
+  }
+
   close() {
     this.db.close((err) => {
       if (err) {
