@@ -1,9 +1,15 @@
 const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs');
+const path = require('path');
 
-const DB_PATH = './.swarm/memory.db';
+const DB_DIR = './.swarm';
+const DB_PATH = path.join(DB_DIR, 'memory.db');
 
 class Memory {
   constructor() {
+    if (!fs.existsSync(DB_DIR)) {
+      fs.mkdirSync(DB_DIR, { recursive: true });
+    }
     this.db = new sqlite3.Database(DB_PATH, (err) => {
       if (err) {
         console.error("Error opening database", err.message);
@@ -14,7 +20,11 @@ class Memory {
           agent TEXT NOT NULL,
           content TEXT NOT NULL,
           timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-        )`);
+        )`, (err) => {
+          if (err) {
+            console.error("Error creating table", err.message);
+          }
+        });
       }
     });
   }
