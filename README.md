@@ -1,16 +1,16 @@
-# Gemini CLI Wrapper
+# AgentFlow: Multi-Agent Orchestration CLI
 
 ## Introduction
 
-This repository, `gemini-langgraph-prototype`, serves as a wrapper around the existing Gemini Command Line Interface (CLI). Its primary purpose is to enhance the capabilities of the Gemini CLI by integrating advanced features such as multi-agent orchestration, persistent memory, and performance metrics.
+This repository, `AgentFlow`, serves as a powerful Command Line Interface (CLI) tool for orchestrating multi-agent AI workflows. It integrates with large language models (LLMs) like Gemini and provides features for persistent memory, performance metrics, and extensibility.
 
 ## Features
 
 *   **Multi-Agent Orchestration:** Allows for the definition and execution of multiple AI agents that can interact with each other in a structured workflow.
 *   **Persistent Memory System:** Integrates a SQLite-based database to store conversational history and agent-specific states persistently.
-*   **Performance Metrics (Token Usage):** Tracks and reports token usage for interactions with the Gemini models.
-*   **Gemini CLI Integration:** Seamlessly wraps the existing `gemini` CLI tool, allowing all underlying model capabilities to be leveraged.
-*   **Configurability:** Allows users to configure agent behaviors, memory settings, and Gemini CLI interaction parameters.
+*   **Performance Metrics (Token Usage):** Tracks and reports token usage for interactions with LLMs.
+*   **LLM Integration:** Seamlessly integrates with LLMs, allowing their capabilities to be leveraged within agent workflows.
+*   **Configurability:** Allows users to configure agent behaviors, memory settings, and LLM interaction parameters.
 *   **Extensibility:** Agents are refactored into separate files to improve extensibility.
 *   **Basic Unit Tests:** Includes a basic unit test for the memory system.
 *   **GitHub Actions:** Basic CI workflow implemented for automated testing.
@@ -21,8 +21,8 @@ This repository, `gemini-langgraph-prototype`, serves as a wrapper around the ex
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/anchapin/gemini-langgraph-prototype.git
-    cd gemini-langgraph-prototype
+    git clone https://github.com/anchapin/AgentFlow.git
+    cd AgentFlow
     ```
 
 2.  **Install dependencies:**
