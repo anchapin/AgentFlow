@@ -1,5 +1,4 @@
 const { StateGraph } = require("@langchain/langgraph");
-const { StateGraph } = require("@langchain/langgraph");
 const { z } = require("zod");
 const config = require('./config');
 const { agentOne } = require('./agents/agentOne');
@@ -9,6 +8,7 @@ const { agentTwo } = require('./agents/agentTwo');
 const graphState = {
   messages: {
     value: (x, y) => x.concat(y),
+    default: () => [],
     schema: z.array(z.string()),
   },
   turns: {

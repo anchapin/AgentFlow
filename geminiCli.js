@@ -1,8 +1,8 @@
 const { exec } = require('child_process');
-const { getEncoding } = require('tiktoken');
+const { get_encoding } = require('tiktoken');
 const config = require('./config');
 
-const encoding = getEncoding('cl100k_base');
+const encoding = get_encoding('cl100k_base');
 let proQuotaExceeded = false;
 
 async function callGeminiCli(prompt) {
