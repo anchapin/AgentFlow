@@ -1,4 +1,5 @@
-const { app } = require("./multiAgentScenario");
+const { startInteractiveCli } = require("./ui/cli");
+const { startInteractiveCli } = require("./ui/cli");
 const { Memory } = require("./memory");
 
 async function runMultiAgentScenario() {
@@ -77,7 +78,7 @@ async function main() {
       memory.close();
     }
   } else {
-    runMultiAgentScenario();
+    startInteractiveCli();
   }
 }
 
