@@ -2,6 +2,7 @@ const { StateGraph } = require("@langchain/langgraph");
 const { callGeminiCli } = require("./geminiCli");
 const { z } = require("zod");
 const { Memory } = require("./memory");
+const config = require('./config');
 
 const memory = new Memory();
 
@@ -67,7 +68,7 @@ async function agentTwo(state) {
 }
 
 // Define a router to decide which agent to call next
-const MAX_TURNS = 3; // Define a maximum number of turns for collaboration
+const MAX_TURNS = config.agents.maxTurns; // Define a maximum number of turns for collaboration
 
 function router(state) {
   if (state.turns >= MAX_TURNS) {
