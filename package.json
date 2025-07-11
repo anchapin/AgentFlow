@@ -13,6 +13,7 @@
   "dependencies": {
     "@langchain/langgraph": "^0.3.7",
     "langchain": "^0.3.29",
+    "tiktoken": "^1.0.21",
     "zod": "^3.25.76"
   }
 }
