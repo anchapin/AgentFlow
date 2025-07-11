@@ -16,17 +16,25 @@ class Memory {
         console.error("Error opening database", err.message);
       } else {
         console.log("Connected to the SQLite database.");
-        this.db.run(`CREATE TABLE IF NOT EXISTS messages (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          agent TEXT NOT NULL,
-          content TEXT NOT NULL,
-          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-        )`, (err) => {
-          if (err) {
-            console.error("Error creating table", err.message);
-          }
-        });
       }
+    });
+  }
+
+  async init() {
+    return new Promise((resolve, reject) => {
+      this.db.run(`CREATE TABLE IF NOT EXISTS messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        agent TEXT NOT NULL,
+        content TEXT NOT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+      )`, (err) => {
+        if (err) {
+          console.error("Error creating table", err.message);
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
     });
   }
 
