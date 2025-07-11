@@ -2,10 +2,7 @@
   "name": "agentflow",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
-  "bin": {
-    "agentflow": "./bin/agentflow.js"
-  },
+  "main": "index.js",
   "scripts": {
     "test": "node test/basic.test.js"
   },
@@ -18,7 +15,6 @@
     "langchain": "^0.3.29",
     "sqlite3": "^5.1.7",
     "tiktoken": "^1.0.21",
-    "yargs": "^18.0.0",
     "zod": "^3.25.76"
   }
 }

@@ -37,31 +37,19 @@ This repository, `AgentFlow`, serves as a powerful Command Line Interface (CLI) 
 To run the multi-agent conversation scenario:
 
 ```bash
-agentflow [prompt]
+node index.js
 ```
 
-### Command-Line Arguments
+### Memory Management
 
-`agentflow` supports the following arguments:
-
-*   `[prompt]`: An optional initial prompt for the multi-agent scenario. If not provided, a default question will be used.
+*   **View Conversation History:**
     ```bash
-    agentflow "Explain quantum entanglement."
+    node index.js --view-memory
     ```
 
-*   `--help` or `-h`: Display usage information and available commands.
+*   **Clear Conversation History:**
     ```bash
-    agentflow --help
-    ```
-
-*   `--view-memory` or `-v`: View the stored conversation history.
-    ```bash
-    agentflow --view-memory
-    ```
-
-*   `--clear-memory` or `-c`: Clear the entire conversation history.
-    ```bash
-    agentflow --clear-memory
+    node index.js --clear-memory
     ```
 
 ### Running Tests
